@@ -1,0 +1,116 @@
+﻿@model FideGames.Models.clients
+
+@{
+    ViewBag.Title = "CrearClients";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (ViewBag.error == "" | ViewBag.error == null)
+{
+
+}
+else
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <span class="aria-hidden">@ViewBag.error</span>
+    </div>
+
+}
+<div class="card-body card shadow mb-4">
+    <style>
+        .card-title {
+            padding-bottom: 15px;
+            background: #040FD9;
+            color: #fff;
+            padding: 16px 30px;
+            min-width: 100%;
+            margin: -20px -25px 10px;
+            border-radius: 3px 3px 0 0;
+        }
+    </style>
+    <div class="card-title">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Registro de Cliente nuevo</h2>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm("CrearClients", "Clients", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="text-dark">Primer Nombre</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.client_name1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.client_name1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="text-dark">Segundo Nombre</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.client_name2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.client_name2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="text-dark">Primer apellido</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.client_lastname1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.client_lastname1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="text-dark">Segundo Apellido</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.client_lastname2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.client_lastname2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                Identificacion del Cliente
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.client_id_card, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.client_id_card, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="text-dark">Correo del cliente</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.client_email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.client_email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="text-dark">Direccion del Cliente</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.client_direcction, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.client_direcction, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Insertar" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Mostrar lista de Clientes registrados", "ListaClients")
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

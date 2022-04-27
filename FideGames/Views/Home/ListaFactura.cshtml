@@ -1,0 +1,126 @@
+﻿@model IEnumerable<FideGames.Models.invoice>
+
+@{ ViewBag.Title = "Facturas";
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; }
+
+
+@if (ViewBag.exito == "" | ViewBag.exito == null)
+{
+
+}
+else
+{
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <span class="aria-hidden">@Html.ViewBag.exito</span>
+</div>}
+@if (ViewBag.error == "" | ViewBag.error == null)
+{
+
+}
+else
+{
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <span class="aria-hidden">@ViewBag.error</span>
+</div>}
+
+<div class="card-body card shadow mb-4">
+    <style>
+        .table-title {
+            padding-bottom: 15px;
+            background: #040FD9;
+            color: #fff;
+            padding: 16px 30px;
+            min-width: 100%;
+            margin: -20px -25px 10px;
+            border-radius: 3px 3px 0 0;
+        }
+
+            .table-title h2 {
+                margin: 5px 0 0;
+                font-size: 24px;
+            }
+
+            .table-title .btn-group {
+                float: right;
+            }
+
+            .table-title .btn {
+                color: #fff;
+                float: right;
+                font-size: 13px;
+                border: none;
+                min-width: 50px;
+                border-radius: 2px;
+                border: none;
+                outline: none !important;
+                margin-left: 10px;
+            }
+    </style>
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Lista de Facturas</h2>
+            </div>
+        </div>
+
+    </div>
+    <div class="table-responsive">
+        <table id="TableInvoice" class="table table-avance table-striped ">
+            <thead class="table-dark">
+                <tr>
+
+                    <th class="">
+                        Vendedor
+                    </th>
+                    <th>
+                        Cliente
+                    </th>
+                    <th>
+                        Fecha de Venta
+                    </th>
+                    <th class="">
+                        Total de la Venta
+                    </th>
+                    <th class="">
+                        Comentario
+                    </th>
+                    <th class="">
+                        Estado del Pago
+                    </th>
+                </tr>
+            </thead>
+            <tbody class=" ">
+                @foreach (var item in Model)
+                {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Users.userName)
+        </td>
+        <td>
+            @{ String clienteName = item.clients.client_name1 + item.clients.client_name2; }
+            @clienteName
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_sell)
+        </td>
+        <td>
+            ₡ @Html.DisplayFor(modelItem => item.sale_total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.payment_des)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.invoice_status1.invoice_status_name)
+        </td>
+    </tr>
+}
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center ">
+        @Html.ActionLink("Volver", "Index", new { @class = "btn btn-default mr-2" })
+    </div>
+</div>
+

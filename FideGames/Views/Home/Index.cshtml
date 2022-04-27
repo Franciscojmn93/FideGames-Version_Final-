@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@if (ViewBag.Mensaje == "" | ViewBag.Mensaje == null)
+{
+
+}
+else { 
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <span class="aria-hidden">@Html.ViewBag.Mensaje</span>
+</div>
+
+}
+
+
+<h2>Panel Administrativo</h2>
+
+<div class="jumbotron">
+    <h1 class="display-4">Bienvenido @HttpContext.Current.Session["name"].ToString()</h1>
+    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+        Sistema de ventas interno FIDEGAMES STORE, Life is a game
+    </div>
+    <hr class="my-4">
+    <p>Datos generales de la tienda</p>
+</div>
+
+<div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Total de Ventas:
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.Sells</div>
+                    @Html.ActionLink("Mostrar Lista", "ListaFactura")
+                </div>
+                <div class="col-auto">
+                    <i class='fas fa-chart-bar' style='font-size:48px;color:Highlight'></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Clientes Registrados:
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.Clients</div>
+                    @Html.ActionLink("Mostrar Lista", "ListaClients")
+                </div>
+                <div class="col-auto">
+                    <i class='far fa-address-card' style='font-size:48px;color:Highlight'></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Productos en bodega:
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.Products</div>
+                    @Html.ActionLink("Mostrar Lista", "ListaProducts")
+                </div>
+                <div class="col-auto">
+                    <i class='fas fa-folder-open' style='font-size:48px;color:Highlight'></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

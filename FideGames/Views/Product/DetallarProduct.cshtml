@@ -1,0 +1,139 @@
+﻿@model FideGames.Models.product
+
+@{
+    ViewBag.Title = "DetallarProduct";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}@if (ViewBag.Mensaje == "" | ViewBag.Mensaje == null)
+{
+}
+else
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Exitoso!</strong>
+        <span class="aria-hidden">@Html.ViewBag.Mensaje</span>
+    </div>
+
+}
+<div class="card-body card shadow mb-4">
+    <style>
+        .card-title {
+            padding-bottom: 15px;
+            background: #040FD9;
+            color: #fff;
+            padding: 16px 30px;
+            min-width: 100%;
+            margin: -20px -25px 10px;
+            border-radius: 3px 3px 0 0;
+        }
+    </style>
+    <div class="card-title">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Detalles del Producto</h2>
+            </div>
+        </div>
+    </div>
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label class="text-dark">Nombre</label>
+                <input disabled class="form-control" id="colFormLabel" placeholder="@Html.DisplayFor(model => model.product_name)">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label class="text-dark">Categoria</label>
+                <input disabled class="form-control" id="colFormLabel" placeholder="@Html.DisplayFor(model => model.type_product.type_product_name)">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label class="text-dark">Departamento del Producto</label>
+                <input disabled class="form-control" id="colFormLabel" placeholder="@Html.DisplayFor(model => model.deparment_product.deparment_product_name)">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label class="text-dark">Marca del producto</label>
+                <input disabled class="form-control" id="colFormLabel" placeholder="  @Html.DisplayFor(model => model.brand_product.brand_product_name)">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label class="text-dark">Descripcion del producto</label>
+                <input disabled class="form-control" id="colFormLabel" placeholder="  @Html.DisplayFor(model => model.product_description)">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label class="text-dark">Cantidad disponible de productos</label>
+                <input disabled class="form-control" id="colFormLabel" placeholder="  @Html.DisplayFor(model => model.quantities)">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label class="text-dark">Precio</label>
+                <input disabled class="form-control" id="colFormLabel" placeholder="  @Html.DisplayFor(model => model.price)">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+
+                @Html.ActionLink("Editar", "EditarProduct", new { id = Model.product_id }, new { @class = "btn btn-warning" })
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    Eliminar
+                </button>
+            </div>
+            <div class="col-md-10 mt-3">
+                @Html.ActionLink("Mostrar lista de Productos", "ListaProducts")
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal usuarios-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <i class="fas fa-exclamation-triangle" style="color:red;"></i>
+                    Advertencia
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Esta Seguro que desea Eliminar el Producto: @Html.DisplayFor(model => model.product_name) ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                @using (Html.BeginForm("EliminarProduct", "Product", FormMethod.Post))
+                {
+
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.product_name)
+                    @Html.HiddenFor(model => model.type_product.type_product_name)
+                    @Html.HiddenFor(model => model.deparment_product.deparment_product_name)
+                    @Html.HiddenFor(model => model.brand_product.brand_product_name)
+                    @Html.HiddenFor(model => model.product_description)
+                    @Html.HiddenFor(model => model.quantities)
+                    @Html.HiddenFor(model => model.price)
+
+                    <div class="form-actions no-color">
+                        @Html.ActionLink("Eliminar", "EliminarProduct", new { id = Model.product_id }, new { @class = "btn btn-danger" })    <!-- el boton lo cambie para poder enviar por parametro el userId-->
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
